@@ -76,7 +76,6 @@ model UserProfile {
 }
 
 
-
 // enum for booking
 enum BookingStatus {
   PENDING

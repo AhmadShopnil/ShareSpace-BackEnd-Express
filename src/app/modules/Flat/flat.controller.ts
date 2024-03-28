@@ -10,12 +10,21 @@ const addFlat = async (req: Request, res: Response) => {
       message: "Flat added successfully",
       data: result,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      statusCode: 500,
+      message: "Faild to add flat",
+      error: error,
+    });
+  }
 };
 
 const getFlat = async (req: Request, res: Response) => {
+  //   console.log(req.query);
+
   try {
-    const result = await flatServices.getFlatFromDB();
+    const result = await flatServices.getFlatFromDB(req.query);
     res.send({
       status: "success",
       result,
