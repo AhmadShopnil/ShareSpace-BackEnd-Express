@@ -6,11 +6,16 @@ Welcome to the backend repository of the Flat Share Application! This backend ap
 
 ### 1. Clone the Repository
 
-```bash
+````bash
 git clone https://github.com/Porgramming-Hero-web-course/l2-b2-fullstack-track-assignment-8-AhmadShopnil.git
 
+```bash
 cd l2-b2-fullstack-track-assignment-8-AhmadShopnil
+
+```bash
 npm install
+
+```bash
 npm run dev
 
 
@@ -28,4 +33,4 @@ npm run dev
 - Web Framework: Express.js
 - Object Relational Mapping (ORM): Prisma for PostgreSQL
 - Authentication: JWT (JSON Web Tokens)
-```
+````
