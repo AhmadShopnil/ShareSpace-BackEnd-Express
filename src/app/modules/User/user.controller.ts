@@ -21,8 +21,8 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const getSingleUserProfileByID = async (req: Request, res: Response) => {
-  const { userId } = req.params;
+const getSingleUserProfileByID = async (req: any, res: Response) => {
+  const { userId } = req.user;
 
   try {
     const userProfile = await userServices.getUserProfileFromDB(userId);
@@ -40,8 +40,8 @@ const getSingleUserProfileByID = async (req: Request, res: Response) => {
   }
 };
 
-const updateUserProfile = async (req: Request, res: Response) => {
-  const { userId } = req.params;
+const updateUserProfile = async (req: any, res: Response) => {
+  const { userId } = req.user;
   const updatedProfileData = req.body;
 
   try {
