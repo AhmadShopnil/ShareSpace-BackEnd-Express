@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { bookingSevices } from "./booking.services";
 
-const addBooking = async (req: Request, res: Response) => {
-  const { flatId, userId } = req.body;
+const addBooking = async (req: any, res: Response) => {
+  const { flatId } = req.body;
+
+  const { userId } = req?.user;
 
   try {
     const booking = await bookingSevices.addBookingIntoDB(flatId, userId);

@@ -8,20 +8,22 @@ import handleZodError from "../errors/handleZodError";
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
   let errorMessage = err.message || " Something wrong!";
-  let formatedIssues = null;
+  let errorDetails = err;
 
   // check error type
   if (err instanceof ZodError) {
     statusCode = 400;
     const formatedError = handleZodError(err);
     errorMessage = formatedError.zodMessage;
-    formatedIssues = formatedError.formatedIssues;
+    errorDetails = {
+      issues: formatedError.formatedIssues,
+    };
   }
 
   return res.status(statusCode).json({
     success: false,
     message: errorMessage,
-    errorDetails: { issues: formatedIssues },
+    errorDetails,
   });
 };
 
