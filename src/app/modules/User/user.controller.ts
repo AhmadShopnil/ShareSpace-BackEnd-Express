@@ -1,10 +1,15 @@
-import { Application, Request, Response } from "express";
+import { Application, NextFunction, Request, Response } from "express";
 import { userServices } from "./user.services";
+import { UserValidation } from "./userZodValidationSchema";
 
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
   //   console.log(req.body);
   try {
-    const result = await userServices.createUserIntoDB(req.body);
+    const zodValidatedData = UserValidation.userValidationSchema.parse(
+      req.body
+    );
+
+    const result = await userServices.createUserIntoDB(zodValidatedData);
     res.status(201).json({
       success: true,
       statusCode: 201,
@@ -12,12 +17,7 @@ const createUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      statusCode: 500,
-      message: "Faild to create user",
-      error: error,
-    });
+    next(error);
   }
 };
 

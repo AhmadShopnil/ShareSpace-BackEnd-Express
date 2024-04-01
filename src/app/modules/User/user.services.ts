@@ -12,9 +12,7 @@ interface CreateUserInput {
   address: string;
 }
 
-const createUserIntoDB = async (
-  payload: CreateUserInput
-): Promise<User | null> => {
+const createUserIntoDB = async (payload: CreateUserInput) => {
   const hashedPassword = await bcrypt.hash(payload.password, 12);
   const userInfo = {
     name: payload.name,
@@ -34,7 +32,7 @@ const createUserIntoDB = async (
     });
 
     // Create user profile associated with the created user
-    const createdProfile = await transaction.userProfile.create({
+    await transaction.userProfile.create({
       data: {
         ...profileInfo,
         user: { connect: { id: createdUser.id } }, // Connect the profile to the created user
@@ -44,7 +42,9 @@ const createUserIntoDB = async (
     return createdUser;
   });
 
-  return result;
+  const { password, ...userWithoutPassword } = result;
+
+  return userWithoutPassword;
 };
 
 const getUserProfileFromDB = async (userId: any) => {
