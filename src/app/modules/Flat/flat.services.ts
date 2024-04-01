@@ -46,7 +46,7 @@ const getFlatFromDB = async (params: any, options: any) => {
       AND: Object.keys(filteredField).map((key) => ({
         [key]: {
           equals: filteredField[key],
-          // mode: "insensitive",
+          mode: "insensitive",
         },
       })),
     });
