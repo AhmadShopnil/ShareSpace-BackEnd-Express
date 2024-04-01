@@ -27,10 +27,10 @@ const getAllBookingFromDB = async () => {
   const bookingRequests = await prisma.booking.findMany();
   return bookingRequests;
 };
-const getBookingFromDB = async (userId: String) => {
-  const bookingRequests = await prisma.booking.findMany({
+const getBookingFromDB = async (bookingId: String) => {
+  const bookingRequests = await prisma.booking.find({
     where: {
-      userId,
+      bookingId,
     },
   });
   return bookingRequests;

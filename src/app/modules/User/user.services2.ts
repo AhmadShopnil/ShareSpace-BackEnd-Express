@@ -15,8 +15,6 @@ const createUserIntoDB = async (payload: any) => {
     address: payload.address,
   };
 
-  //   console.log({ userInfo, profileInfo });
-
   // create user using transaction and rollback
   const result = await prisma.$transaction(async (userProfileTransaction) => {
     await userProfileTransaction.user.create({
