@@ -39,7 +39,6 @@ const getSingleBooking = async (req: Request, res: Response) => {
   }
 };
 const getAllBooking = async (req: Request, res: Response) => {
-  console.log("form booking controller");
   try {
     const bookingRequests = await bookingSevices.getAllBookingFromDB();
     res.status(200).json({

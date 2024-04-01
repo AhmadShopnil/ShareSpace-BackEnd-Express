@@ -6,11 +6,11 @@ import { bookingRoutes } from "../modules/Booking/booking.routes";
 const router = Router();
 
 const moduleRoutes = [
-  { path: "/", route: userRoutes },
-  { path: "/flat", route: flatRoutes },
+  { path: "/flats", route: flatRoutes },
   // { path: "/booking", route: bookingRoutes },
   { path: "/booking-applications", route: bookingRoutes },
   { path: "/booking-requests", route: bookingRoutes },
+  { path: "/", route: userRoutes },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
