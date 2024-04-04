@@ -1,10 +1,15 @@
 import { Application, Request, Response } from "express";
 import { flatServices } from "./flat.services";
 import pick from "../../shared/pick";
+import { FlatValidation } from "./flatZodValidationSchema";
 
 const addFlat = async (req: Request, res: Response) => {
   try {
-    const result = await flatServices.addFlatIntoDB(req.body);
+    const zodValidatedData = FlatValidation.flatValidationSchema.parse(
+      req.body
+    );
+
+    const result = await flatServices.addFlatIntoDB(zodValidatedData);
     res.send({
       success: true,
       statusCode: 201,

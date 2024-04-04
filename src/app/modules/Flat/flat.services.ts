@@ -3,7 +3,7 @@ import { paginationHelper } from "../../helpers/paginationHelper";
 
 const prisma = new PrismaClient();
 
-const addFlatIntoDB = async (payload: Flat) => {
+const addFlatIntoDB = async (payload: any) => {
   const result = await prisma.flat.create({
     data: { ...payload },
   });
